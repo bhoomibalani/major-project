@@ -5,7 +5,7 @@ import seaborn as sns
 import altair as alt
 
 st.set_page_config(layout="wide")
-st.sidebar.title("WABRA Chat Analyzer")
+st.sidebar.title("ConvoLens")
 uploaded_file = st.sidebar.file_uploader("Choose a File")
 
 if uploaded_file:
@@ -52,62 +52,62 @@ if uploaded_file:
                 st.bar_chart(x)
                 st.dataframe(df_per)
 
-            st.title("Word Cloud & Most Common Words")
-            df_wc = helper.create_wordcloud(selected_user, df)
-            if df_wc is None:
-                st.info("Not enough text messages to generate a word cloud.")
-            else:
-                st.image(
-                    df_wc.to_image(),
-                    caption="Word Cloud",
-                    use_container_width=True,
-                )
+            # st.title("Word Cloud & Most Common Words")
+            # df_wc = helper.create_wordcloud(selected_user, df)
+            # if df_wc is None:
+            #     st.info("Not enough text messages to generate a word cloud.")
+            # else:
+            #     st.image(
+            #         df_wc.to_image(),
+            #         caption="Word Cloud",
+            #         use_container_width=True,
+            #     )
 
-            most_common_df = helper.most_common_words(selected_user, df)
-            if most_common_df.empty:
-                st.info("No common words found for this selection.")
-            else:
-                st.bar_chart(most_common_df.set_index(0))
+            # most_common_df = helper.most_common_words(selected_user, df)
+            # if most_common_df.empty:
+            #     st.info("No common words found for this selection.")
+            # else:
+            #     st.bar_chart(most_common_df.set_index(0))
 
-            st.title("Emoji Analysis")
-            emoji_df = helper.emoji_helper(selected_user, df)
-            if emoji_df.empty:
-                st.info("No emojis found for this selection.")
-            else:
-                emoji_df.columns = ["Emoji", "Count"]
-                st.dataframe(emoji_df)
-                pie_chart = (
-                    alt.Chart(emoji_df)
-                    .mark_arc()
-                    .encode(
-                        theta=alt.Theta(field="Count", type="quantitative"),
-                        color=alt.Color(field="Emoji", type="nominal"),
-                        tooltip=["Emoji", "Count"],
-                    )
-                    .properties(width=400, height=400)
-                )
-                st.altair_chart(pie_chart, use_container_width=True)
+            # st.title("Emoji Analysis")
+            # emoji_df = helper.emoji_helper(selected_user, df)
+            # if emoji_df.empty:
+            #     st.info("No emojis found for this selection.")
+            # else:
+            #     emoji_df.columns = ["Emoji", "Count"]
+            #     st.dataframe(emoji_df)
+            #     pie_chart = (
+            #         alt.Chart(emoji_df)
+            #         .mark_arc()
+            #         .encode(
+            #             theta=alt.Theta(field="Count", type="quantitative"),
+            #             color=alt.Color(field="Emoji", type="nominal"),
+            #             tooltip=["Emoji", "Count"],
+            #         )
+            #         .properties(width=400, height=400)
+            #     )
+            #     st.altair_chart(pie_chart, use_container_width=True)
 
-            st.title("Timeline Analysis")
-            timeline = helper.monthly_timeline(selected_user, df)
-            if timeline.empty:
-                st.info("No timeline data available.")
-            else:
-                st.line_chart(timeline.set_index("time")["message"])
+            # st.title("Timeline Analysis")
+            # timeline = helper.monthly_timeline(selected_user, df)
+            # if timeline.empty:
+            #     st.info("No timeline data available.")
+            # else:
+            #     st.line_chart(timeline.set_index("time")["message"])
 
-            st.title("Activity Map")
-            week_activity = helper.week_activity_map(selected_user, df)
-            month_activity = helper.month_activity_map(selected_user, df)
-            if week_activity.empty:
-                st.info("No activity data available.")
-            else:
-                st.bar_chart(week_activity)
-                st.bar_chart(month_activity)
+            # st.title("Activity Map")
+            # week_activity = helper.week_activity_map(selected_user, df)
+            # month_activity = helper.month_activity_map(selected_user, df)
+            # if week_activity.empty:
+            #     st.info("No activity data available.")
+            # else:
+            #     st.bar_chart(week_activity)
+            #     st.bar_chart(month_activity)
 
-            st.title("Weekly Activity Heatmap")
-            user_heatmap = helper.activity_heatmap(selected_user, df)
-            if user_heatmap.empty:
-                st.info("No heatmap data available.")
-            else:
-                sns.heatmap(user_heatmap, ax=plt.gca())
-                st.pyplot(plt.gcf())
+            # st.title("Weekly Activity Heatmap")
+            # user_heatmap = helper.activity_heatmap(selected_user, df)
+            # if user_heatmap.empty:
+            #     st.info("No heatmap data available.")
+            # else:
+            #     sns.heatmap(user_heatmap, ax=plt.gca())
+            #     st.pyplot(plt.gcf())
