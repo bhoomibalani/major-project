@@ -5,7 +5,7 @@ import seaborn as sns
 import altair as alt
 
 st.set_page_config(layout="wide")
-st.sidebar.title("ConvoLens")
+st.sidebar.title("ChatSense AI")
 uploaded_file = st.sidebar.file_uploader("Choose a File")
 
 if uploaded_file:
